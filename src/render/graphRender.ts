@@ -242,6 +242,12 @@ export abstract class BaseGraphRender implements GraphRender {
 	) {
 		if (graphConfig.cellStyle) {
 			Object.assign(cellEl.style, graphConfig.cellStyle);
+			if (graphConfig.cellStyle.minWidth) {
+				cellEl.style.width = graphConfig.cellStyle.minWidth;
+			}
+			if (graphConfig.cellStyle.minHeight) {
+				cellEl.style.height = graphConfig.cellStyle.minHeight;
+			}
 		}
 	}
 
@@ -257,6 +263,12 @@ export abstract class BaseGraphRender implements GraphRender {
 				return acc;
 			}, {});
 			Object.assign(cellEl.style, partialStyle);
+			if (props.includes("minWidth") && graphConfig.cellStyle.minWidth) {
+				cellEl.style.width = graphConfig.cellStyle.minWidth;
+			}
+			if (props.includes("minHeight") && graphConfig.cellStyle.minHeight) {
+				cellEl.style.height = graphConfig.cellStyle.minHeight;
+			}
 		}
 	}
 

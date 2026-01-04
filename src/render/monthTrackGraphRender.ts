@@ -108,8 +108,7 @@ export class MonthTrackGraphRender extends BaseGraphRender {
 
 			// fill hole at start month, if start month date is not 1
 			if (i == 0) {
-				const startDate = new Date(contributionItem.date).getDate();
-				const fillMax = startDate - 1;
+				const fillMax = contributionItem.monthDate - 1;
 				for (let j = 0; j < fillMax; j++) {
 					const cellEl = document.createElement("div");
 					cellEl.className = "cell";

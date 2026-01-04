@@ -48,8 +48,7 @@ export class GitStyleTrackGraphRender extends BaseGraphRender {
 
 		// fill HOLE cell at the left most column if start date is not ${startOfWeek}
 		if (contributionData.length > 0) {
-			const from = new Date(contributionData[0].date);
-			const weekDayOfFromDate = from.getDay();
+			const weekDayOfFromDate = contributionData[0].weekDay;
 			const firstHoleCount = distanceBeforeTheStartOfWeek(
 				graphConfig.startOfWeek || 0,
 				weekDayOfFromDate
