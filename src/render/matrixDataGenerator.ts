@@ -1,6 +1,7 @@
-import { diffDays } from "../util/dateUtils";
+import { diffDays, parseDate } from "../util/dateUtils";
 import { Contribution, ContributionCellData } from "../types";
 import { DateTime } from "luxon";
+
 
 export function generateByData(data: Contribution[]) {
 	if (!data || data.length === 0) {
@@ -8,18 +9,13 @@ export function generateByData(data: Contribution[]) {
 	}
 
 	const dateData = data.map((item) => {
-		if (item.date instanceof Date) {
-			return {
-				...item,
-				timestamp: item.date.getTime(),
-			};
-		} else {
-			return {
-				...item,
-				date: new Date(item.date),
-				timestamp: new Date(item.date).getTime(),
-			};
-		}
+		const localDate = parseDate(item.date);
+		
+		return {
+			...item,
+			date: localDate,
+			timestamp: localDate.getTime(),
+		};
 	});
 
 	const sortedData = dateData.sort((a, b) => b.timestamp - a.timestamp);

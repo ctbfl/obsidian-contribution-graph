@@ -2,6 +2,13 @@ import { DateTime } from "luxon";
 
 export function parseDate(date: string | Date) {
 	if (typeof date === "string") {
+		// Check whether it is pure date format (yyyy-MM-dd)
+		// if so, parse it to local timezone
+		if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+			const [y, m, d] = date.split('-').map(Number);
+			// new Date(y, m, d) create 00:00:00 in local timezone
+			return new Date(y, m - 1, d);
+		}
 		return new Date(date);
 	} else {
 		return date;
